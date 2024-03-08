@@ -1,6 +1,5 @@
-// pages/index.tsx
-import React from 'react';
-import useSWR from 'swr';
+import React from 'react'
+import useSWR from 'swr'
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
@@ -8,11 +7,10 @@ const fetcher = async (url: string) => {
   return data;
 };
 
-export default function Home() {
-  const { data, error } = useSWR('https://rickandmortyapi.com/api/character', fetcher);
-
-  if (error) return <div>Error loading data</div>;
-  if (!data) return <div>Loading...</div>;
-
-  return <h1>{data.name}</h1>;
+function Profile() {
+  const { data, error, isLoading } = useSWR('https://rickandmortyapi.com/api/character', fetcher)
+ 
+  if (error) return <div>failed to load</div>
+  if (isLoading) return <div>loading...</div>
+  return <div>hello {data.name}!</div>
 }
