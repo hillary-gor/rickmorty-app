@@ -1,5 +1,17 @@
 import Image from "next/image";
 
+const defaultEndpoint = `https://rickandmortyapi.com/api/character/`;
+
+export async function getServerSideProps() {
+  const res = await fetch(defaultEndpoint)
+  const data = await res.json();
+  return {
+    props: {
+      data
+    }
+  }
+}
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
